@@ -1,4 +1,3 @@
-/* eslint-disable default-case */
 const initialState = {
     counter: 0
 };
@@ -12,9 +11,15 @@ export default function rootReducer(state = initialState, action) {
             }
         case 'SUB':
             return {
-                counter: state.counter - 1
+                counter: state.counter -1
             }
+        case 'ADD_NUMBER':
+            return {
+                counter: state.counter  + action.payload
+            }
+        default:
+            return state
     }
 
-    return state;
+    // return state;
 }
