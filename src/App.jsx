@@ -1,10 +1,11 @@
 import React, { Component } from "react";
+import {connect} from "react-redux";
 import "./App.scss";
 
 class App extends Component {
-  state = {
-    counter: 0
-  };
+  // state = {
+  //   counter: 0
+  // };
 
   updateCounter(value) {
     this.setState({
@@ -13,10 +14,11 @@ class App extends Component {
   }
 
   render() {
+    // console.log('App', this.props)
     return (
       <div className={"App"}>
         <h1>
-          <strong>Счётчик {this.state.counter}</strong>
+          <strong>Счётчик {this.props.counter}</strong>
         </h1>
         <hr />
         <div className={"Actions"}>
@@ -28,4 +30,10 @@ class App extends Component {
   }
 }
 
-export default App;
+function mapStateToProps(state) {
+  return {
+    counter: state.counter
+  }
+}
+
+export default connect(mapStateToProps)(App);
