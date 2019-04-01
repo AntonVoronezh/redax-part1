@@ -7,11 +7,11 @@ class App extends Component {
   //   counter: 0
   // };
 
-  updateCounter(value) {
-    this.setState({
-      counter: this.state.counter + value
-    });
-  }
+  // updateCounter(value) {
+  //   // this.setState({
+  //   //   counter: this.state.counter + value
+  //   // });
+  // }
 
   render() {
     // console.log('App', this.props)
@@ -22,8 +22,8 @@ class App extends Component {
         </h1>
         <hr />
         <div className={"Actions"}>
-          <button onClick={() => this.updateCounter(1)}>Добавить 1</button>
-          <button onClick={() => this.updateCounter(-1)}>Отнять 1</button>
+          <button onClick={this.props.onAdd}>Добавить 1</button>
+          <button onClick={this.props.onSub}>Отнять 1</button>
         </div>
       </div>
     );
@@ -36,4 +36,11 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(App);
+function mapDispatchToProps(dispatch) {
+  return {
+    onAdd: () => dispatch({type: 'ADD'}),
+    onSub: () => dispatch({type: 'SUB'})
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
