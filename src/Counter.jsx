@@ -26,7 +26,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-      onChange: number => dispatch(add2()),
+      onChange: number => dispatch(add2(number)),
       
     }
   }
