@@ -4,7 +4,7 @@ import './index.css';
 import App from './App.jsx';
 import * as serviceWorker from './serviceWorker';
 import {
-    createStore, applyMiddleware
+    createStore, applyMiddleware, compose
 } from 'redux';
 import {
     Provider
@@ -23,13 +23,20 @@ import rootReducer from './redux/rootReducer'
 //     } 
 // }
 
+const composeEnhancers =
+  typeof window === 'object' &&
+  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?   
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+      // Specify extension’s options like name, actionsBlacklist, actionsCreators, serialize...
+    }) : compose;
+
 const loggerMiddleware = store => next => action => {
     const result = next(action);
     console.log('Middleware', store.getState());
     return result;
 }
 
-const store = createStore(rootReducer, applyMiddleware(loggerMiddleware, reduxThunk));
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(loggerMiddleware, reduxThunk)));
 
 const app = ( <Provider store = {store} >
     <App />
